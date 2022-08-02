@@ -7,9 +7,9 @@
 
 Airbnb nowdays is one of the most popular host reservation sites where you can book an house, apartament, loft and others types of places, it can be in anywhere in the planet. This blog will be about the Airbnb seattle data base which brings three different files that has information for all available home places and hosts in seattle:
 
-Listings, including full descriptions and average review score
-Reviews, including unique id for each reviewer and detailed comments
-Calendar, including listing id and the price and availability for that day
+- Listings, including full descriptions and average review score
+- Reviews, including unique id for each reviewer and detailed comments
+- Calendar, including listing id and the price and availability for that day
 
 The description of this data base is on here [Seattle Airbnb](https://www.kaggle.com/datasets/airbnb/seattle)
 

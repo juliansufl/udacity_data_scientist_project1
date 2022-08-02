@@ -24,7 +24,7 @@ For the development of this project we use diferent kind of libreries the list o
 
 Also this project where produce in python 3 and the version of the libreries was the newest of day write this readme.
 
-# 2.Project Motivation
+# 2. Project Motivation
 
 As a process to improve the skills as a data scientist take in on a course of Udacity, the decision to explore the dataset of Airbnb in Seattle and make some insides in the information as: 
 
@@ -36,9 +36,14 @@ Indentify which variables have influences on the price of each Airbnb?
 #### Q3
 Can we predict the price of each properties offert to help host to have more bookings?
 
-# File Descriptions
+# 3. File Descriptions
 The Airbnb seattle 
 - Listings, including full descriptions and average review score
 - Reviews, including unique id for each reviewer and detailed comments
 - Calendar, including listing id and the price and availability for that day
 
+# 4. How to Interact with your project
+
+You can read the blog and answer the main question of the project, if you want to deep in the process you can go to the notebook and answer question of the cleaning that might you have.
+
+# Thank you! Gracias totales!

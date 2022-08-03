@@ -46,4 +46,18 @@ The Airbnb seattle
 
 You can read the blog and answer the main question of the project, if you want to deep in the process you can go to the notebook and answer question of the cleaning that might you have.
 
+# 5. Summary of the results
+ 
+check out:
+
+https://juliansufl.github.io/udacity_data_scientist_project1/
+
+# 6. Acknowledgments
+
+scikit-learn developers. (n.d.). sklearn.linear_model.LogisticRegression — scikit-learn 1.1.1 documentation. Retrieved May 12, 2022, from https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+
+Pedregosa, F., Weiss, R., & Brucher, M. (2011). Scikit-learn : Machine Learning in Python. 12, 2825–2830.
+
+Airbnb Seattle data base licence: https://creativecommons.org/publicdomain/zero/1.0/
+
 # Thank you! Gracias totales!

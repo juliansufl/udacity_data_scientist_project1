@@ -1,4 +1,4 @@
-# Welcome to the incredible word of Airbnb in Seattle
+# Airbnb Seattle, this is might help to get more booking 😉
 
 ![1_Z5xW8y_nEaOhnrpgKsrkIw](https://user-images.githubusercontent.com/60525865/182408108-aea6d3d1-3210-4f91-b3cc-9bd394da7155.jpeg)
 
@@ -27,40 +27,13 @@ Before to answer this question this dataset need to be clening, this part just w
 ## Data Wrangling
 First, we identify the shape of the dataset
 ```markdown
-print("Dimension of the dataset for Calendar is", df_calendar.shape[0],'rows and',df_calendar.shape[1],'columns')
-print("Dimension of the dataset for Reviews is", df_reviews.shape[0],'rows and',df_reviews.shape[1],'columns')
-print("Dimension of the dataset for Listings is", df_listing.shape[0],'rows and',df_listing.shape[1],'columns')
-
 Dimension of the dataset for Calendar is 1393570 rows and 4 columns
 Dimension of the dataset for Reviews is 84849 rows and 6 columns
 Dimension of the dataset for Listings is 3818 rows and 92 columns
 ```
 With the shape we like to see the null values that might have the dataset
 
-```markdown
-def graphic_null(df, name):
-    '''
-    The principal idea of this function is to plot all the null information in the datasets
-    for that reason the input is the dataframe and the output the plot
-    '''
-    df_plot = (df.isnull().sum()/df.shape[0])*100
-    df_plot = (df_plot[df_plot>=0]).sort_values()
-    df_plot.plot(kind='bar',figsize=(15, 10),color="Darkblue")
-    plt.title('Porcentaje of Null values in: '+ name)
-    plt.ylabel('Porcentaje of null values')
-    #plt.xticks(rotation = 15)
-    plt.xlabel('Variable')
-    plt.savefig(name+'.png')
-    plt.show()
-    
-seatle_dfs = { 'Calendar': df_calendar,
-              'Reviews': df_reviews,
-              ##'Listings':df_listing
-             }
-
-for name, df in seatle_dfs.items():
-     graphic_null(df, name)
-```
+## Cleaning
 
 ## 📅 Calendar
 ![Calendar](https://user-images.githubusercontent.com/60525865/182382443-dee04bdb-06e6-404e-92a2-0f768016b064.png)
@@ -95,24 +68,6 @@ Also the dataset has information as reviews of comments that it will not need it
 Creating a box plot of accommodates which is the number of day booking, and price we can see that the price has some outliers and might generate problems at time to predict the model, for thar reason we use a z score methodology to remove this outliers and no use it in the dataset.
 
 ```markdown
-def score_remove(df,var, threshold =3):
-    
-    '''Function using z score value for remove outliers 
-    Input: dataframe
-    Out: Dataframe without outliers'''
-    
-    zscore = np.abs(stats.zscore(df[var]))
-    df["zscore"] = zscore
-    df = df[(df.zscore>-  threshold) & (df.zscore< threshold)]
-    df.drop("zscore", axis=1, inplace=True)
-    
-    return df
-
-df_listing_copy = df_listing.copy()
-df_listing = score_remove(df_listing, 'price')
-
-print("Number of outliers:",df_listing_copy.shape[0]-df_listing.shape[0])
-
 Number of outliers: 81
 ```
 
@@ -157,27 +112,7 @@ Can we predict the price of each properties offert to help host to have more boo
 
 To predict the price we take into the account to impute the values missing and the categorical variables that we have, for the first thing we impute values: 
 
-```markdown
-#process to impute data
-impute_median = SimpleImputer(strategy = 'median')
-impute_mode = SimpleImputer(strategy = 'most_frequent')
-impute_mean = SimpleImputer(strategy = 'mean')
-
-def imputation(impute_variable, column):
-    
-    '''This function do the imputation to the desired column.
-    Returns the values for train and test.'''
-
-    imputed = impute_variable.fit_transform(X = df_listing[[column]])
-    
-    return imputed
-
-df_listing.security_deposit  = imputation(impute_mean,"security_deposit")
-df_listing.beds  = imputation(impute_mode,"beds")
-df_listing.bedrooms  = imputation(impute_mode,"bedrooms")
-df_listing.bathrooms  = imputation(impute_mode,"bathrooms")
-df_listing.cleaning_fee  = imputation(impute_mean,"cleaning_fee")
-```
+![image](https://user-images.githubusercontent.com/60525865/182523495-a52813af-9c9f-4a81-b890-8762688672d0.png)
 
 For some information we use the mean because those variebles are express in money, but some we use mode because we cannot have half rooms or something like that.
 
@@ -206,7 +141,8 @@ print(mean_squared_error(ytest, ytest_pred))
 ```
 We can see that the model has a good prediction does not show a subestimation or overestimation.
 
-![lm_regre](https://user-images.githubusercontent.com/60525865/182413286-4f353524-4cab-4874-96bd-c6d1608ad925.png)
+![lm_regre](https://user-images.githubusercontent.com/60525865/182523685-1894c34c-9578-4e0b-8496-13dcee7bc28b.png)
+
 
 ### Decision Tree Regression
 
@@ -227,7 +163,8 @@ print(mean_squared_error(ytest, ytest_pred))
 ```
 We can see that the model has a good prediction does not show a subestimation or overestimation.
 
-![decision_tree](https://user-images.githubusercontent.com/60525865/182416439-da1f1510-3697-436f-97b6-da221db128d0.png)
+![decision_tree](https://user-images.githubusercontent.com/60525865/182523695-d41c096f-f6c0-46a0-a9e9-d30311854544.png)
+
 
 ### Random Forest Regression
 
@@ -249,7 +186,8 @@ print(mean_squared_error(ytest, ytest_pred))
 
 We can see that the model has a good prediction does not show a subestimation or overestimation.
 
-![random_forest](https://user-images.githubusercontent.com/60525865/182417042-76e62dec-2736-49a5-aaf3-fc1689556de5.png)
+![random_forest](https://user-images.githubusercontent.com/60525865/182523710-e4752653-5b61-487c-a7f2-aec8b2e3bf00.png)
+
 
 As a result to implement differents kind of models we have good prediction of the price to booking a Airbnb. Even though the models have more than 50% to predict new information the stronger result it is the random forest it which can predict the 62%, 12% more.
 
